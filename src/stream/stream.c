@@ -16,3 +16,30 @@
 */
 
 #include "./stream.h"
+#include "./pty/pty.h"
+#include "./unix-socket/unix-socket.h"
+
+#define STREAM_TYPE_PTY				0
+#define STREAM_TYPE_UNIX_SOCKET		1
+
+static	stream_open_t		type_open_table[] = {
+    [STREAM_TYPE_PTY] = pty_open,
+    [STREAM_TYPE_UNIX_SOCKET] = unix_socket_open
+};
+
+pstream_t open_stream(const char* name, const char* path)
+{
+    u32 type;
+
+    if(strcmp(name, "pty") == 0) {
+        type = STREAM_TYPE_PTY;
+
+    } else if(strcmp(name, "unix-socket") == 0) {
+        type = STREAM_TYPE_UNIX_SOCKET;
+
+    } else {
+        return NULL;
+    }
+
+    return type_open_table[type](path);
+}

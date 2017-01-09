@@ -19,3 +19,10 @@
 
 #include "../stream.h"
 
+typedef	struct	_pty_stream {
+    stream_t	stream;
+    int			fd_master;
+    char*		path;
+} pty_stream_t, *ppty_stream_t;
+
+pstream_t	pty_open(const char* path);

@@ -13,17 +13,17 @@
             <DEPFLAGS>$(ARCHDEF)</DEPFLAGS>
             <DEPRULE>$(DEP) $(DEPFLAGS) -MM $&lt; | awk 'NR == 1 {printf(&quot;%s%s\n&quot;,&quot;$(dir $@)&quot;,$$0)} NR != 1 {print $$0}' | cat &gt; $@</DEPRULE>
             <CC>gcc</CC>
-            <CFLAGS>-c $(ARCHDEF)</CFLAGS>
+            <CFLAGS>-c $(ARCHDEF) -O0 -std=gnu99</CFLAGS>
             <CCRULE>$(CC) $(CFLAGS) -o $@ $&lt;</CCRULE>
             <AS>gcc</AS>
-            <ASFLAGS>-c $(ARCHDEF)</ASFLAGS>
+            <ASFLAGS>-c $(ARCHDEF) -O0 -std=gnu99</ASFLAGS>
             <ASRULE>$(AS) $(ASFLAGS) -o $@ $&lt;</ASRULE>
             <LD>gcc</LD>
             <LDFLAGS>-lpthread -lutil</LDFLAGS>
             <LDRULE>$(LD) $(LDFLAGS) -o $@ $^</LDRULE>
             <AR></AR>
             <ARRULE></ARRULE>
-            <AFTER></AFTER>
+            <AFTER>cp $^ $@</AFTER>
         </arch>
     </archs>
     <dependencies>

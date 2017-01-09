@@ -145,8 +145,7 @@ def create_makefile(build_tree):
             makefile.write("target :\n")
         makefile.write("\tmkdir -p $(OUTDIR)\n")
         makefile.write("\t$(PREV)\n")
-        makefile.write("\tmake $(LINKED)\n")
-        makefile.write("\t$(AFTER)\n")
+        makefile.write("\tmake $(OUTDIR)/$(OUTPUT)\n")
         makefile.write("\n")
         
         #subtarget
@@ -156,6 +155,11 @@ def create_makefile(build_tree):
                 cmd = "\tcd " + os.path.dirname(s[0].path) + ";make clean\n"
                 makefile.write(cmd)
             makefile.write("\n")
+            
+        #output
+        makefile.write("$(OUTDIR)/$(OUTPUT) : $(LINKED)\n")
+        makefile.write("\t$(AFTER)\n")
+        makefile.write("\n")
 
         #link
         link_deps = ""

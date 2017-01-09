@@ -21,3 +21,5 @@
 
 #define	UNIX_SOCKET_LISTEN			0
 #define	UNIX_SOCKET_CONNECT			1
+
+pstream_t	unix_socket_open(const char* path);

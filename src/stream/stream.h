@@ -19,19 +19,16 @@
 
 #include "../common.h"
 
-#define STREAM_TYPE_PTY				0
-#define STREAM_TYPE_UNIX_SOCKET		1
-
 struct	_stream_t;
 
-//ssize_t read(pstream_t p_this, u8* buf, size_t size);
-typedef	ssize_t	(*stream_read_t)(struct _stream_t*, u8*, size_t);
+//size_t read(pstream_t p_this, u8* buf, size_t size);
+typedef	size_t	(*stream_read_t)(struct _stream_t*, u8*, size_t);
 
-//ssize_t write(pstream_t p_this, const u8* buf, size_t size);
-typedef	ssize_t	(*stream_write_t()struct _stream_t*, const u8*, size_t);
+//bool write(pstream_t p_this, const u8* buf, size_t size);
+typedef	bool	(*stream_write_t)(struct _stream_t*, const u8*, size_t);
 
 //void close(pstream_t p_this);
-typedef void	(*stream_close_t)(pstream_t);
+typedef void	(*stream_close_t)(struct _stream_t*);
 
 typedef	struct	_stream_t {
     const char*		type;
@@ -40,6 +37,7 @@ typedef	struct	_stream_t {
     stream_close_t	close;
 } stream_t, *pstream_t;
 
-typedef	pstream_t	(*stream_open_t)(const char* path);
+//pstream_t	stream_open(const char* path);
+typedef	pstream_t	(*stream_open_t)(const char*);
 
-pstream_t	open_stream(u32 type, const char* path);
+pstream_t	open_stream(const char* name, const char* path);
