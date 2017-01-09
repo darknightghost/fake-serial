@@ -31,24 +31,28 @@ FOCUS_PREV	ui/menu.py	/^    FOCUS_PREV = -2$/;"	kind:v	line:90	language:Python	c
 GREEN	ui/data.py	/^    GREEN = curses.COLOR_GREEN$/;"	kind:v	line:60	language:Python	class:color_t
 KEEP	analyser/target.py	/^    KEEP = 0$/;"	kind:v	line:34	language:Python	class:target
 LD	Makefile	/^LD = gcc$/;"	kind:m	line:17	language:Make
-LDFLAGS	Makefile	/^LDFLAGS = $/;"	kind:m	line:18	language:Make
+LDFLAGS	Makefile	/^LDFLAGS = -lpthread -lutil$/;"	kind:m	line:18	language:Make
 LDRULE	Makefile	/^LDRULE = $(LD) $(LDFLAGS) -o $@ $^$/;"	kind:m	line:19	language:Make
 LINKED	Makefile	/^LINKED = $(MIDDIR)\/$(NAME).$(ARCH).linked$/;"	kind:m	line:23	language:Make
 MAGENTA	ui/data.py	/^    MAGENTA = curses.COLOR_MAGENTA$/;"	kind:v	line:63	language:Python	class:color_t
-MIDDIR	Makefile	/^MIDDIR = .\/obj$(ARCH)$/;"	kind:m	line:5	language:Make
+MIDDIR	Makefile	/^MIDDIR = .\/obj\/$(ARCH)$/;"	kind:m	line:5	language:Make
 MissingArch	analyser/target_exceptions.py	/^class MissingArch(Exception):$/;"	kind:c	line:40	language:Python	inherits:Exception
 MissingAttribute	analyser/target_exceptions.py	/^class MissingAttribute(Exception):$/;"	kind:c	line:29	language:Python	inherits:Exception
 MissingDepecncency	cfg/err.py	/^class MissingDepecncency(Exception):$/;"	kind:c	line:26	language:Python	inherits:Exception
 MissingSourceFile	cfg/err.py	/^class MissingSourceFile(Exception):$/;"	kind:c	line:38	language:Python	inherits:Exception
 MissingTag	analyser/target_exceptions.py	/^class MissingTag(Exception):$/;"	kind:c	line:20	language:Python	inherits:Exception
-NAME	Makefile	/^NAME = Sandnix 0.0.2 configuration$/;"	kind:m	line:1	language:Make
+NAME	Makefile	/^NAME = fake-serial$/;"	kind:m	line:1	language:Make
 OPTION_DICT	analyser/options.py	/^OPTION_DICT = {"checkbox" : opt_checkbox,$/;"	kind:v	line:264	language:Python
 OUTDIR	Makefile	/^OUTDIR = .\/bin\/$(ARCH)$/;"	kind:m	line:4	language:Make
 OUTPUT	Makefile	/^OUTPUT = fake-serial$/;"	kind:m	line:3	language:Make
 PREV	Makefile	/^PREV = $/;"	kind:m	line:6	language:Make
 RED	ui/data.py	/^    RED = curses.COLOR_RED$/;"	kind:v	line:62	language:Python	class:color_t
 RESERVE	analyser/target.py	/^    RESERVE = 1$/;"	kind:v	line:35	language:Python	class:target
+STREAM_TYPE_PTY	src/stream/stream.h	22;"	kind:d	line:22	language:C++
+STREAM_TYPE_UNIX_SOCKET	src/stream/stream.h	23;"	kind:d	line:23	language:C++
 SourceFileIsDir	cfg/err.py	/^class SourceFileIsDir(Exception):$/;"	kind:c	line:45	language:Python	inherits:Exception
+UNIX_SOCKET_CONNECT	src/stream/unix-socket/unix-socket.h	23;"	kind:d	line:23	language:C++
+UNIX_SOCKET_LISTEN	src/stream/unix-socket/unix-socket.h	22;"	kind:d	line:22	language:C++
 UNREFERENCED_PARAMETER	src/common.h	39;"	kind:d	line:39	language:C++
 WHITE	ui/data.py	/^    WHITE = curses.COLOR_WHITE$/;"	kind:v	line:65	language:Python	class:color_t
 YELLOW	ui/data.py	/^    YELLOW = curses.COLOR_YELLOW$/;"	kind:v	line:64	language:Python	class:color_t
@@ -109,6 +113,11 @@ __str__	cfg/err.py	/^    def __str__(self):$/;"	kind:m	line:35	language:Python	c
 __str__	cfg/err.py	/^    def __str__(self):$/;"	kind:m	line:42	language:Python	class:MissingSourceFile	file:	access:private
 __str__	cfg/err.py	/^    def __str__(self):$/;"	kind:m	line:49	language:Python	class:SourceFileIsDir	file:	access:private
 __str__	ui/menu.py	/^    def __str__(self):$/;"	kind:m	line:32	language:Python	class:ControlTypeError	file:	access:private
+_stream_t	src/stream/stream.h	/^typedef	struct	_stream_t {$/;"	kind:s	line:36	language:C++
+_stream_t::close	src/stream/stream.h	/^    stream_close_t	close;$/;"	kind:m	line:40	language:C++	struct:_stream_t	access:public
+_stream_t::read	src/stream/stream.h	/^    stream_read_t	read;$/;"	kind:m	line:38	language:C++	struct:_stream_t	access:public
+_stream_t::type	src/stream/stream.h	/^    const char*		type;$/;"	kind:m	line:37	language:C++	struct:_stream_t	access:public
+_stream_t::write	src/stream/stream.h	/^    stream_write_t	write;$/;"	kind:m	line:39	language:C++	struct:_stream_t	access:public
 analyse_menu	ui/menu.py	/^    def analyse_menu(self,menu):$/;"	kind:m	line:268	language:Python	class:menu	access:public
 arch	analyser/arch.py	/^class arch:$/;"	kind:c	line:29	language:Python	inherits:
 bool	src/common.h	/^typedef	u8					bool;$/;"	kind:t	line:34	language:C++
@@ -119,6 +128,7 @@ close	analyser/arch.py	/^    def close(self):$/;"	kind:m	line:46	language:Python
 close	analyser/options.py	/^    def close(self):$/;"	kind:m	line:240	language:Python	class:opt_menu	access:public
 close	analyser/options.py	/^    def close(self):$/;"	kind:m	line:27	language:Python	class:options	access:public
 close	analyser/target.py	/^    def close(self):$/;"	kind:m	line:87	language:Python	class:target	access:public
+close	src/stream/stream.h	/^    stream_close_t	close;$/;"	kind:m	line:40	language:C++	struct:_stream_t	access:public
 close_menu	analyser/arch.py	/^    def close_menu(self):$/;"	kind:m	line:89	language:Python	class:arch	access:public
 close_menu	analyser/options.py	/^    def close_menu(self):$/;"	kind:m	line:152	language:Python	class:opt_list	access:public
 close_menu	analyser/options.py	/^    def close_menu(self):$/;"	kind:m	line:208	language:Python	class:opt_input	access:public
@@ -147,6 +157,7 @@ curses	ui/controls/textbox.py	/^import curses$/;"	kind:i	line:18	language:Python
 curses	ui/data.py	/^import curses$/;"	kind:i	line:18	language:Python
 curses	ui/screen.py	/^import curses$/;"	kind:i	line:18	language:Python
 dispatch_input	ui/menu.py	/^    def dispatch_input(self,key):$/;"	kind:m	line:239	language:Python	class:menu	access:public
+do_work	src/main.c	/^static	int		do_work();$/;"	kind:p	line:26	language:C	file:
 dom	analyser/arch.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 dom	analyser/options.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 dom	analyser/target.py	/^import xml.dom.minidom$/;"	kind:i	line:20	language:Python
@@ -190,7 +201,7 @@ lable	ui/controls/lable.py	/^class lable(control):$/;"	kind:c	line:22	language:P
 listcontrol	ui/controls/listcontrol.py	/^class listcontrol(control):$/;"	kind:c	line:22	language:Python	inherits:control
 locale	ui/data.py	/^import locale$/;"	kind:i	line:19	language:Python
 locale	ui/screen.py	/^import locale$/;"	kind:i	line:20	language:Python
-main	src/main.c	/^int main(int argc, char* argv[])$/;"	kind:f	line:20	language:C	signature:(int argc, char* argv[])
+main	src/main.c	/^int main(int argc, char* argv[])$/;"	kind:f	line:29	language:C	signature:(int argc, char* argv[])
 menu	ui/menu.py	/^class menu:$/;"	kind:c	line:88	language:Python	inherits:
 menu	ui/screen.py	/^from ui import menu$/;"	kind:i	line:23	language:Python
 minidom	analyser/arch.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
@@ -237,6 +248,7 @@ open_menu	analyser/options.py	/^    def open_menu(self):$/;"	kind:m	line:245	lan
 open_menu	analyser/options.py	/^    def open_menu(self):$/;"	kind:m	line:36	language:Python	class:options	access:public
 open_menu	analyser/options.py	/^    def open_menu(self):$/;"	kind:m	line:85	language:Python	class:opt_checkbox	access:public
 open_menu	analyser/target.py	/^    def open_menu(self):$/;"	kind:m	line:247	language:Python	class:target	access:public
+open_stream	src/stream/stream.h	/^pstream_t	open_stream(u32 type, const char* path);$/;"	kind:p	line:45	language:C++	signature:(u32 type, const char* path)
 opt_checkbox	analyser/options.py	/^class opt_checkbox(options):$/;"	kind:c	line:45	language:Python	inherits:options
 opt_input	analyser/options.py	/^class opt_input(options):$/;"	kind:c	line:164	language:Python	inherits:options
 opt_list	analyser/options.py	/^class opt_list(options):$/;"	kind:c	line:103	language:Python	inherits:options
@@ -246,6 +258,9 @@ os	analyser/target.py	/^import os$/;"	kind:i	line:21	language:Python
 os	analyser/target_exceptions.py	/^import os$/;"	kind:i	line:18	language:Python
 os	cfg/configure.py	/^import os$/;"	kind:i	line:22	language:Python
 pos_t	ui/data.py	/^class pos_t:$/;"	kind:c	line:78	language:Python	inherits:
+print_lock	src/main.c	/^static	pthread_mutex_t			print_lock;$/;"	kind:v	line:23	language:C	file:
+pstream_t	src/stream/stream.h	/^} stream_t, *pstream_t;$/;"	kind:t	line:41	language:C++	typeref:struct:_stream_t
+read	src/stream/stream.h	/^    stream_read_t	read;$/;"	kind:m	line:38	language:C++	struct:_stream_t	access:public
 rect_t	ui/data.py	/^class rect_t:$/;"	kind:c	line:87	language:Python	inherits:
 refresh	ui/controls/checkbox.py	/^	def refresh(self):$/;"	kind:m	line:35	language:Python	class:checkbox	access:public
 refresh	ui/controls/listcontrol.py	/^    def refresh(self):$/;"	kind:m	line:44	language:Python	class:listcontrol	access:public
@@ -262,24 +277,35 @@ scan_sources	cfg/configure.py	/^def scan_sources(arch_name):$/;"	kind:f	line:278
 screen	ui/screen.py	/^class screen:$/;"	kind:c	line:25	language:Python	inherits:
 screen_main	ui/screen.py	/^    def screen_main(self,menu_list,title):$/;"	kind:m	line:56	language:Python	class:screen	access:public
 show_menu	ui/menu.py	/^    def show_menu(self,menu):$/;"	kind:m	line:103	language:Python	class:menu	access:public
+size_t	src/stream/stream.h	/^typedef	ssize_t	(*stream_write_t()struct _stream_t*, const u8*, size_t);$/;"	kind:t	line:31	language:C++
 sort_build_tree	cfg/configure.py	/^def sort_build_tree(build_tree):$/;"	kind:f	line:261	language:Python	access:public
 stat	cfg/configure.py	/^import stat$/;"	kind:i	line:23	language:Python
 str_help	ui/screen.py	/^    str_help = "Press <ESC> to return. Press <Page Up>, <Page Down> to switch pages. Press <↑>, <↓>, <←>, <→> to switch focus in one window. Press <TAB> to switch focus among all windows."$/;"	kind:v	line:49	language:Python	class:screen
+stream_close_t	src/stream/stream.h	/^typedef void	(*stream_close_t)(pstream_t);$/;"	kind:t	line:34	language:C++
+stream_open_t	src/stream/stream.h	/^typedef	pstream_t	(*stream_open_t)(const char* path);$/;"	kind:t	line:43	language:C++
+stream_read_t	src/stream/stream.h	/^typedef	ssize_t	(*stream_read_t)(struct _stream_t*, u8*, size_t);$/;"	kind:t	line:28	language:C++
+stream_t	src/stream/stream.h	/^} stream_t, *pstream_t;$/;"	kind:t	line:41	language:C++	typeref:struct:_stream_t
 submenu	ui/menu.py	/^class submenu(control):$/;"	kind:c	line:35	language:Python	inherits:control
 sys	ui/screen.py	/^import sys$/;"	kind:i	line:19	language:Python
 tag_list	analyser/arch.py	/^    tag_list = ["PREV", "ARCHDEF", "DEP", "DEPFLAGS", "DEPRULE", "CC", "CFLAGS", "CCRULE", "AS", "ASFLAGS",$/;"	kind:v	line:30	language:Python	class:arch
 target	analyser/target.py	/^class target:$/;"	kind:c	line:33	language:Python	inherits:
 target_dict	analyser/target.py	/^    target_dict = {}$/;"	kind:v	line:37	language:Python	class:target
 textbox	ui/controls/textbox.py	/^class textbox(control):$/;"	kind:c	line:22	language:Python	inherits:control
+thread_printf	src/main.c	/^static	void	thread_printf(char* fmt, ...);$/;"	kind:p	line:27	language:C	file:	signature:(char* fmt, ...)
 traceback	ui/screen.py	/^import traceback$/;"	kind:i	line:21	language:Python
 true	src/common.h	35;"	kind:d	line:35	language:C++
+type	src/stream/stream.h	/^    const char*		type;$/;"	kind:m	line:37	language:C++	struct:_stream_t	access:public
 u16	src/common.h	/^typedef unsigned short		u16;$/;"	kind:t	line:25	language:C++
 u32	src/common.h	/^typedef unsigned int		u32;$/;"	kind:t	line:26	language:C++
 u64	src/common.h	/^typedef unsigned long long	u64;$/;"	kind:t	line:27	language:C++
 u8	src/common.h	/^typedef	unsigned char		u8;$/;"	kind:t	line:24	language:C++
+u8	src/stream/stream.h	/^typedef	ssize_t	(*stream_write_t()struct _stream_t*, const u8*, size_t);$/;"	kind:t	line:31	language:C++
 update	ui/controls/textbox.py	/^    def update(self):$/;"	kind:m	line:213	language:Python	class:textbox	access:public
 update	ui/screen.py	/^    def update(self):$/;"	kind:m	line:104	language:Python	class:screen	access:public
+usage	src/main.c	/^static	void	usage(const char* filename);$/;"	kind:p	line:25	language:C	file:	signature:(const char* filename)
+usage	src/main.c	/^void usage(const char* filename)$/;"	kind:f	line:43	language:C	signature:(const char* filename)
 utf8buf	ui/data.py	/^class utf8buf:$/;"	kind:c	line:21	language:Python	inherits:
+write	src/stream/stream.h	/^    stream_write_t	write;$/;"	kind:m	line:39	language:C++	struct:_stream_t	access:public
 xml	analyser/arch.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 xml	analyser/options.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 xml	analyser/target.py	/^import xml.dom.minidom$/;"	kind:i	line:20	language:Python

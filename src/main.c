@@ -16,7 +16,38 @@
 */
 
 #include "./common.h"
+#include "./stream/stream.h"
+#include <phread.h>
+#include <stdargs.h>
+
+static	pthread_mutex_t			print_lock;
+
+static	void	usage(const char* filename);
+static	int		do_work();
+static	void	thread_printf(char* fmt, ...);
 
 int main(int argc, char* argv[])
 {
+    //Get args
+    pthread_mutex_init(&print_lock, NULL);
+
+    if(argc != 5) {
+        usage(argv[0]);
+        return -1;
+    }
+
+    pstream_t p_s1, p_s2;
+    return 0;
+}
+
+void usage(const char* filename)
+{
+    printf("Usage:\n"
+           "\t%s input-stream-type1 path1 input-stream-type2 path2\n"
+           "Supported type:\n"
+           "\tpty"
+           "\tunix-spcket\n",
+           filename);
+
+    return;
 }

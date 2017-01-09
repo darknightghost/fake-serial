@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><target name="Sandnix 0.0.2 configuration" type="build">
+<?xml version="1.0" encoding="utf-8"?><target name="fake-serial" type="build">
     <output name="fake-serial"/>
     <outdir path="./bin/$(ARCH)"/>
-    <middir path="./obj$(ARCH)"/>
+    <middir path="./obj/$(ARCH)"/>
     <introduction>
       fake-serial.
     </introduction>
@@ -19,7 +19,7 @@
             <ASFLAGS>-c $(ARCHDEF)</ASFLAGS>
             <ASRULE>$(AS) $(ASFLAGS) -o $@ $&lt;</ASRULE>
             <LD>gcc</LD>
-            <LDFLAGS></LDFLAGS>
+            <LDFLAGS>-lpthread -lutil</LDFLAGS>
             <LDRULE>$(LD) $(LDFLAGS) -o $@ $^</LDRULE>
             <AR></AR>
             <ARRULE></ARRULE>

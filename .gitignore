@@ -90,6 +90,9 @@ ENV/
 
 bin/*
 obj/*
-
 Makefile
+.directory
+tags
+*~
+*.swp
 
