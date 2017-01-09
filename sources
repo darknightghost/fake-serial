@@ -1,1 +1,4 @@
-./src/main.c
+src/main.c
+src/stream/stream.c
+src/stream/pty/pty.c
+src/stream/unix-socket/unix-socket.c
