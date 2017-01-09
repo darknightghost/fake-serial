@@ -162,9 +162,9 @@ curses	ui/data.py	/^import curses$/;"	kind:i	line:18	language:Python
 curses	ui/screen.py	/^import curses$/;"	kind:i	line:18	language:Python
 dispatch_input	ui/menu.py	/^    def dispatch_input(self,key):$/;"	kind:m	line:239	language:Python	class:menu	access:public
 do_exit	src/main.c	/^static	void	do_exit(int);$/;"	kind:p	line:36	language:C	file:	signature:(int)
-do_exit	src/main.c	/^void do_exit(int unused)$/;"	kind:f	line:200	language:C	signature:(int unused)
+do_exit	src/main.c	/^void do_exit(int unused)$/;"	kind:f	line:202	language:C	signature:(int unused)
 do_work	src/main.c	/^static	void	do_work(pstream_t p_s1, pstream_t p_s2, bool _1_to_2);$/;"	kind:p	line:34	language:C	file:	signature:(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)
-do_work	src/main.c	/^void do_work(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)$/;"	kind:f	line:146	language:C	signature:(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)
+do_work	src/main.c	/^void do_work(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)$/;"	kind:f	line:148	language:C	signature:(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)
 dom	analyser/arch.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 dom	analyser/options.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 dom	analyser/target.py	/^import xml.dom.minidom$/;"	kind:i	line:20	language:Python
@@ -294,7 +294,7 @@ regist	analyser/arch.py	/^    def regist(self, dict):$/;"	kind:m	line:49	languag
 run_flag	src/main.c	/^static	volatile bool			run_flag;$/;"	kind:v	line:25	language:C	file:
 s16	src/common.h	/^typedef signed short		s16;$/;"	kind:t	line:33	language:C++
 s2_send_thread	src/main.c	/^static	void*	s2_send_thread(void* args);$/;"	kind:p	line:35	language:C	file:	signature:(void* args)
-s2_send_thread	src/main.c	/^void* s2_send_thread(void* args)$/;"	kind:f	line:214	language:C	signature:(void* args)
+s2_send_thread	src/main.c	/^void* s2_send_thread(void* args)$/;"	kind:f	line:216	language:C	signature:(void* args)
 s32	src/common.h	/^typedef signed int			s32;$/;"	kind:t	line:34	language:C++
 s64	src/common.h	/^typedef signed long long	s64;$/;"	kind:t	line:35	language:C++
 s8	src/common.h	/^typedef	signed char			s8;$/;"	kind:t	line:32	language:C++
@@ -320,9 +320,9 @@ textbox	ui/controls/textbox.py	/^class textbox(control):$/;"	kind:c	line:22	lang
 thread1	src/main.c	/^static	volatile pthread_t		thread1;$/;"	kind:v	line:28	language:C	file:
 thread2	src/main.c	/^static	volatile pthread_t		thread2;$/;"	kind:v	line:29	language:C	file:
 thread_print_buf	src/main.c	/^static	void	thread_print_buf(char* fmt, u8* buf, size_t len, ...);$/;"	kind:p	line:33	language:C	file:	signature:(char* fmt, u8* buf, size_t len, ...)
-thread_print_buf	src/main.c	/^void thread_print_buf(char* fmt, u8 * buf, size_t len, ...)$/;"	kind:f	line:125	language:C	signature:(char* fmt, u8 * buf, size_t len, ...)
+thread_print_buf	src/main.c	/^void thread_print_buf(char* fmt, u8 * buf, size_t len, ...)$/;"	kind:f	line:127	language:C	signature:(char* fmt, u8 * buf, size_t len, ...)
 thread_printf	src/main.c	/^static	void	thread_printf(char* fmt, ...);$/;"	kind:p	line:32	language:C	file:	signature:(char* fmt, ...)
-thread_printf	src/main.c	/^void thread_printf(char* fmt, ...)$/;"	kind:f	line:115	language:C	signature:(char* fmt, ...)
+thread_printf	src/main.c	/^void thread_printf(char* fmt, ...)$/;"	kind:f	line:117	language:C	signature:(char* fmt, ...)
 traceback	ui/screen.py	/^import traceback$/;"	kind:i	line:21	language:Python
 true	src/common.h	38;"	kind:d	line:38	language:C++
 type	src/stream/stream.h	/^    const char*		type;$/;"	kind:m	line:34	language:C++	struct:_stream_t	access:public
@@ -336,7 +336,7 @@ unix_socket_open	src/stream/unix-socket/unix-socket.h	/^pstream_t	unix_socket_op
 update	ui/controls/textbox.py	/^    def update(self):$/;"	kind:m	line:213	language:Python	class:textbox	access:public
 update	ui/screen.py	/^    def update(self):$/;"	kind:m	line:104	language:Python	class:screen	access:public
 usage	src/main.c	/^static	void	usage(const char* filename);$/;"	kind:p	line:31	language:C	file:	signature:(const char* filename)
-usage	src/main.c	/^void usage(const char* filename)$/;"	kind:f	line:103	language:C	signature:(const char* filename)
+usage	src/main.c	/^void usage(const char* filename)$/;"	kind:f	line:105	language:C	signature:(const char* filename)
 utf8buf	ui/data.py	/^class utf8buf:$/;"	kind:c	line:21	language:Python	inherits:
 write	src/stream/stream.h	/^    stream_write_t	write;$/;"	kind:m	line:36	language:C++	struct:_stream_t	access:public
 xml	analyser/arch.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python

@@ -74,11 +74,13 @@ int main(int argc, char* argv[])
     //Create stream 2 send thread
     run_flag = true;
 
-    if(pthread_create((pthread_t* restrict)&thread1, NULL, s2_send_thread,
+    if(pthread_create((pthread_t* restrict)&thread2, NULL, s2_send_thread,
                       NULL) != 0) {
         printf("Failed to create thread.\n");
         goto EXCEPT_CREATE_THREAD;
     }
+
+    thread_printf("Fake serial enabled.\n");
 
     //Stream 1 send thread
     do_work(p_s1, p_s2, true);
