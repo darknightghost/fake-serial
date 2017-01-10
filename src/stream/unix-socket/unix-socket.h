@@ -19,7 +19,11 @@
 
 #include "../stream.h"
 
-#define	UNIX_SOCKET_LISTEN			0
-#define	UNIX_SOCKET_CONNECT			1
+typedef	struct	_unix_socket_stream {
+    stream_t	stream;
+    int			fd;
+    char*		path;
+    u32			mode;
+} unix_socket_stream_t, *punix_socket_stream_t;
 
 pstream_t	unix_socket_open(const char* path);

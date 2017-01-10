@@ -17,6 +17,7 @@
 
 #include "./pty.h"
 #include <pty.h>
+#include <sys/select.h>
 
 static	size_t	pty_read(ppty_stream_t p_this, u8* buf, size_t size);
 static	bool	pty_write(ppty_stream_t p_this, const u8* buf, size_t size);
@@ -77,6 +78,7 @@ pstream_t pty_open(const char* path)
     p_ret->stream.read = (stream_read_t)pty_read;
     p_ret->stream.write = (stream_write_t)pty_write;
     p_ret->stream.close = (stream_close_t)pty_close;
+    p_ret->stream.type = "pty";
 
     return (pstream_t)p_ret;
 
@@ -98,6 +100,10 @@ size_t pty_read(ppty_stream_t p_this, u8* buf, size_t size)
     ssize_t read_len = read(p_this->fd_master, buf, size);
 
     if(read_len < 0) {
+        if(errno == EIO) {
+            usleep(500);
+        }
+
         return 0;
     }
 

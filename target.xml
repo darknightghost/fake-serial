@@ -13,7 +13,7 @@
             <DEPFLAGS>$(ARCHDEF)</DEPFLAGS>
             <DEPRULE>$(DEP) $(DEPFLAGS) -MM $&lt; | awk 'NR == 1 {printf(&quot;%s%s\n&quot;,&quot;$(dir $@)&quot;,$$0)} NR != 1 {print $$0}' | cat &gt; $@</DEPRULE>
             <CC>gcc</CC>
-            <CFLAGS>-c $(ARCHDEF) -O0 -std=gnu99</CFLAGS>
+            <CFLAGS>-c $(ARCHDEF) -O0 -std=gnu99 -Werror -Werror-implicit-function-declaration -Wunused-parameter</CFLAGS>
             <CCRULE>$(CC) $(CFLAGS) -o $@ $&lt;</CCRULE>
             <AS>gcc</AS>
             <ASFLAGS>-c $(ARCHDEF) -O0 -std=gnu99</ASFLAGS>

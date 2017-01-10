@@ -22,7 +22,8 @@
 #include <signal.h>
 
 static	pthread_mutex_t			print_lock;
-static	volatile bool			run_flag;
+static	pthread_mutex_t			exit_lock;
+static	volatile bool			run_flag = false;
 static  volatile pstream_t		p_s1;
 static  volatile pstream_t		p_s2;
 static	volatile pthread_t		thread1;
@@ -72,6 +73,7 @@ int main(int argc, char* argv[])
     thread1 = pthread_self();
 
     //Create stream 2 send thread
+    pthread_mutex_init(&exit_lock, NULL);
     run_flag = true;
 
     if(pthread_create((pthread_t* restrict)&thread2, NULL, s2_send_thread,
@@ -86,8 +88,8 @@ int main(int argc, char* argv[])
     do_work(p_s1, p_s2, true);
 
     pthread_join(thread2, NULL);
-    p_s2->close(p_s2);
-    p_s1->close(p_s1);
+    //p_s2->close(p_s2);
+    //p_s1->close(p_s1);
     printf("Exited.\n");
 
     return 0;
@@ -203,10 +205,33 @@ void do_exit(int unused)
 {
     thread_printf("SIGINT caught.\n");
 
-    if(run_flag) {
-        run_flag = false;
+    run_flag = false;
+    pthread_mutex_lock(&exit_lock);
+
+    if(pthread_self() == thread1) {
+        p_s1->close(p_s1);
+        p_s1 = NULL;
+
+    } else if(pthread_self() == thread2) {
+        p_s2->close(p_s2);
+        p_s2 = NULL;
+    }
+
+    if(p_s1 != NULL) {
         pthread_kill(thread1, SIGINT);
+    }
+
+    if(p_s2 != NULL) {
         pthread_kill(thread2, SIGINT);
+    }
+
+    pthread_mutex_unlock(&exit_lock);
+
+    if(pthread_self() == thread2) {
+        pthread_exit(NULL);
+
+    } else {
+        exit(0);
     }
 
     UNREFERENCED_PARAMETER(unused);
@@ -217,4 +242,7 @@ void* s2_send_thread(void* args)
 {
     do_work(p_s1, p_s2, false);
     pthread_exit(NULL);
+    return NULL;
+
+    UNREFERENCED_PARAMETER(args);
 }

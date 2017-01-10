@@ -17,8 +17,10 @@ BLACK	ui/data.py	/^    BLACK = curses.COLOR_BLACK$/;"	kind:v	line:58	language:Py
 BLUE	ui/data.py	/^    BLUE = curses.COLOR_BLUE$/;"	kind:v	line:59	language:Python	class:color_t
 CC	Makefile	/^CC = gcc$/;"	kind:m	line:11	language:Make
 CCRULE	Makefile	/^CCRULE = $(CC) $(CFLAGS) -o $@ $<$/;"	kind:m	line:13	language:Make
-CFLAGS	Makefile	/^CFLAGS = -c $(ARCHDEF) -O0 -std=gnu99 -g$/;"	kind:m	line:12	language:Make
+CFLAGS	Makefile	/^CFLAGS = -c $(ARCHDEF) -O0 -std=gnu99 -Werror -Werror-implicit-function-declaration -Wunused-parameter -g$/;"	kind:m	line:12	language:Make
 CONFLICT	analyser/target.py	/^    CONFLICT = 3$/;"	kind:v	line:36	language:Python	class:target
+CONNECT	src/stream/unix-socket/unix-socket.c	27;"	kind:d	line:27	language:C	file:
+CONNECT_HEAD	src/stream/unix-socket/unix-socket.c	24;"	kind:d	line:24	language:C	file:
 CYAN	ui/data.py	/^    CYAN = curses.COLOR_CYAN$/;"	kind:v	line:61	language:Python	class:color_t
 ConfilctDepecncency	cfg/err.py	/^class ConfilctDepecncency(Exception):$/;"	kind:c	line:18	language:Python	inherits:Exception
 ControlTypeError	ui/menu.py	/^class ControlTypeError(Exception):$/;"	kind:c	line:26	language:Python	inherits:Exception
@@ -34,6 +36,8 @@ LD	Makefile	/^LD = gcc$/;"	kind:m	line:17	language:Make
 LDFLAGS	Makefile	/^LDFLAGS = -lpthread -lutil$/;"	kind:m	line:18	language:Make
 LDRULE	Makefile	/^LDRULE = $(LD) $(LDFLAGS) -o $@ $^$/;"	kind:m	line:19	language:Make
 LINKED	Makefile	/^LINKED = $(MIDDIR)\/$(NAME).$(ARCH).linked$/;"	kind:m	line:23	language:Make
+LISTEN	src/stream/unix-socket/unix-socket.c	26;"	kind:d	line:26	language:C	file:
+LISTEN_HEAD	src/stream/unix-socket/unix-socket.c	23;"	kind:d	line:23	language:C	file:
 MAGENTA	ui/data.py	/^    MAGENTA = curses.COLOR_MAGENTA$/;"	kind:v	line:63	language:Python	class:color_t
 MIDDIR	Makefile	/^MIDDIR = .\/obj\/$(ARCH)$/;"	kind:m	line:5	language:Make
 MissingArch	analyser/target_exceptions.py	/^class MissingArch(Exception):$/;"	kind:c	line:40	language:Python	inherits:Exception
@@ -51,8 +55,6 @@ RESERVE	analyser/target.py	/^    RESERVE = 1$/;"	kind:v	line:35	language:Python	
 STREAM_TYPE_PTY	src/stream/stream.c	22;"	kind:d	line:22	language:C	file:
 STREAM_TYPE_UNIX_SOCKET	src/stream/stream.c	23;"	kind:d	line:23	language:C	file:
 SourceFileIsDir	cfg/err.py	/^class SourceFileIsDir(Exception):$/;"	kind:c	line:45	language:Python	inherits:Exception
-UNIX_SOCKET_CONNECT	src/stream/unix-socket/unix-socket.h	23;"	kind:d	line:23	language:C++
-UNIX_SOCKET_LISTEN	src/stream/unix-socket/unix-socket.h	22;"	kind:d	line:22	language:C++
 UNREFERENCED_PARAMETER	src/common.h	42;"	kind:d	line:42	language:C++
 WHITE	ui/data.py	/^    WHITE = curses.COLOR_WHITE$/;"	kind:v	line:65	language:Python	class:color_t
 YELLOW	ui/data.py	/^    YELLOW = curses.COLOR_YELLOW$/;"	kind:v	line:64	language:Python	class:color_t
@@ -122,6 +124,11 @@ _stream_t::close	src/stream/stream.h	/^    stream_close_t	close;$/;"	kind:m	line
 _stream_t::read	src/stream/stream.h	/^    stream_read_t	read;$/;"	kind:m	line:35	language:C++	struct:_stream_t	access:public
 _stream_t::type	src/stream/stream.h	/^    const char*		type;$/;"	kind:m	line:34	language:C++	struct:_stream_t	access:public
 _stream_t::write	src/stream/stream.h	/^    stream_write_t	write;$/;"	kind:m	line:36	language:C++	struct:_stream_t	access:public
+_unix_socket_stream	src/stream/unix-socket/unix-socket.h	/^typedef	struct	_unix_socket_stream {$/;"	kind:s	line:22	language:C++
+_unix_socket_stream::fd	src/stream/unix-socket/unix-socket.h	/^    int			fd;$/;"	kind:m	line:24	language:C++	struct:_unix_socket_stream	access:public
+_unix_socket_stream::mode	src/stream/unix-socket/unix-socket.h	/^    u32			mode;$/;"	kind:m	line:26	language:C++	struct:_unix_socket_stream	access:public
+_unix_socket_stream::path	src/stream/unix-socket/unix-socket.h	/^    char*		path;$/;"	kind:m	line:25	language:C++	struct:_unix_socket_stream	access:public
+_unix_socket_stream::stream	src/stream/unix-socket/unix-socket.h	/^    stream_t	stream;$/;"	kind:m	line:23	language:C++	struct:_unix_socket_stream	access:public
 analyse_menu	ui/menu.py	/^    def analyse_menu(self,menu):$/;"	kind:m	line:268	language:Python	class:menu	access:public
 arch	analyser/arch.py	/^class arch:$/;"	kind:c	line:29	language:Python	inherits:
 bool	src/common.h	/^typedef	u8					bool;$/;"	kind:t	line:37	language:C++
@@ -161,10 +168,14 @@ curses	ui/controls/textbox.py	/^import curses$/;"	kind:i	line:18	language:Python
 curses	ui/data.py	/^import curses$/;"	kind:i	line:18	language:Python
 curses	ui/screen.py	/^import curses$/;"	kind:i	line:18	language:Python
 dispatch_input	ui/menu.py	/^    def dispatch_input(self,key):$/;"	kind:m	line:239	language:Python	class:menu	access:public
-do_exit	src/main.c	/^static	void	do_exit(int);$/;"	kind:p	line:36	language:C	file:	signature:(int)
-do_exit	src/main.c	/^void do_exit(int unused)$/;"	kind:f	line:202	language:C	signature:(int unused)
-do_work	src/main.c	/^static	void	do_work(pstream_t p_s1, pstream_t p_s2, bool _1_to_2);$/;"	kind:p	line:34	language:C	file:	signature:(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)
-do_work	src/main.c	/^void do_work(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)$/;"	kind:f	line:148	language:C	signature:(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)
+do_connect	src/stream/unix-socket/unix-socket.c	/^int do_connect(const char* path, punix_socket_stream_t p_stream)$/;"	kind:f	line:186	language:C	signature:(const char* path, punix_socket_stream_t p_stream)
+do_connect	src/stream/unix-socket/unix-socket.c	/^static	int		do_connect(const char* path, punix_socket_stream_t p_stream);$/;"	kind:p	line:35	language:C	file:	signature:(const char* path, punix_socket_stream_t p_stream)
+do_exit	src/main.c	/^static	void	do_exit(int);$/;"	kind:p	line:37	language:C	file:	signature:(int)
+do_exit	src/main.c	/^void do_exit(int unused)$/;"	kind:f	line:204	language:C	signature:(int unused)
+do_listen	src/stream/unix-socket/unix-socket.c	/^int do_listen(const char* path, punix_socket_stream_t p_stream)$/;"	kind:f	line:126	language:C	signature:(const char* path, punix_socket_stream_t p_stream)
+do_listen	src/stream/unix-socket/unix-socket.c	/^static	int		do_listen(const char* path, punix_socket_stream_t p_stream);$/;"	kind:p	line:34	language:C	file:	signature:(const char* path, punix_socket_stream_t p_stream)
+do_work	src/main.c	/^static	void	do_work(pstream_t p_s1, pstream_t p_s2, bool _1_to_2);$/;"	kind:p	line:35	language:C	file:	signature:(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)
+do_work	src/main.c	/^void do_work(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)$/;"	kind:f	line:150	language:C	signature:(pstream_t p_s1, pstream_t p_s2, bool _1_to_2)
 dom	analyser/arch.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 dom	analyser/options.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 dom	analyser/target.py	/^import xml.dom.minidom$/;"	kind:i	line:20	language:Python
@@ -181,7 +192,9 @@ draw_shadow	ui/controls/listcontrol.py	/^    def draw_shadow(self):$/;"	kind:m	l
 draw_wnd	ui/controls/listcontrol.py	/^    def draw_wnd(self):$/;"	kind:m	line:119	language:Python	class:listcontrol	access:public
 draw_wnd	ui/menu.py	/^    def draw_wnd(self):$/;"	kind:m	line:191	language:Python	class:menu	access:public
 edit	ui/controls/textbox.py	/^    def edit(self):$/;"	kind:m	line:111	language:Python	class:textbox	access:public
+exit_lock	src/main.c	/^static	pthread_mutex_t			exit_lock;$/;"	kind:v	line:25	language:C	file:
 false	src/common.h	39;"	kind:d	line:39	language:C++
+fd	src/stream/unix-socket/unix-socket.h	/^    int			fd;$/;"	kind:m	line:24	language:C++	struct:_unix_socket_stream	access:public
 fd_master	src/stream/pty/pty.h	/^    int			fd_master;$/;"	kind:m	line:24	language:C++	struct:_pty_stream	access:public
 get_all_sub_targets	analyser/target.py	/^    def get_all_sub_targets(self):$/;"	kind:m	line:369	language:Python	class:target	access:public
 get_build_tree	cfg/configure.py	/^def get_build_tree(root):$/;"	kind:f	line:258	language:Python	access:public
@@ -209,12 +222,13 @@ lable	ui/controls/lable.py	/^class lable(control):$/;"	kind:c	line:22	language:P
 listcontrol	ui/controls/listcontrol.py	/^class listcontrol(control):$/;"	kind:c	line:22	language:Python	inherits:control
 locale	ui/data.py	/^import locale$/;"	kind:i	line:19	language:Python
 locale	ui/screen.py	/^import locale$/;"	kind:i	line:20	language:Python
-main	src/main.c	/^int main(int argc, char* argv[])$/;"	kind:f	line:38	language:C	signature:(int argc, char* argv[])
+main	src/main.c	/^int main(int argc, char* argv[])$/;"	kind:f	line:39	language:C	signature:(int argc, char* argv[])
 menu	ui/menu.py	/^class menu:$/;"	kind:c	line:88	language:Python	inherits:
 menu	ui/screen.py	/^from ui import menu$/;"	kind:i	line:23	language:Python
 minidom	analyser/arch.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 minidom	analyser/options.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
 minidom	analyser/target.py	/^import xml.dom.minidom$/;"	kind:i	line:20	language:Python
+mode	src/stream/unix-socket/unix-socket.h	/^    u32			mode;$/;"	kind:m	line:26	language:C++	struct:_unix_socket_stream	access:public
 on_back	ui/menu.py	/^    def on_back(self):$/;"	kind:m	line:318	language:Python	class:menu	access:public
 on_backspace	ui/controls/textbox.py	/^    def on_backspace(self):$/;"	kind:m	line:179	language:Python	class:textbox	access:public
 on_delete	ui/controls/textbox.py	/^    def on_delete(self):$/;"	kind:m	line:169	language:Python	class:textbox	access:public
@@ -266,22 +280,24 @@ options	analyser/options.py	/^class options:$/;"	kind:c	line:21	language:Python	
 os	analyser/target.py	/^import os$/;"	kind:i	line:21	language:Python
 os	analyser/target_exceptions.py	/^import os$/;"	kind:i	line:18	language:Python
 os	cfg/configure.py	/^import os$/;"	kind:i	line:22	language:Python
-p_s1	src/main.c	/^static  volatile pstream_t		p_s1;$/;"	kind:v	line:26	language:C	file:
-p_s2	src/main.c	/^static  volatile pstream_t		p_s2;$/;"	kind:v	line:27	language:C	file:
+p_s1	src/main.c	/^static  volatile pstream_t		p_s1;$/;"	kind:v	line:27	language:C	file:
+p_s2	src/main.c	/^static  volatile pstream_t		p_s2;$/;"	kind:v	line:28	language:C	file:
 path	src/stream/pty/pty.h	/^    char*		path;$/;"	kind:m	line:25	language:C++	struct:_pty_stream	access:public
+path	src/stream/unix-socket/unix-socket.h	/^    char*		path;$/;"	kind:m	line:25	language:C++	struct:_unix_socket_stream	access:public
 pos_t	ui/data.py	/^class pos_t:$/;"	kind:c	line:78	language:Python	inherits:
 ppty_stream_t	src/stream/pty/pty.h	/^} pty_stream_t, *ppty_stream_t;$/;"	kind:t	line:26	language:C++	typeref:struct:_pty_stream
 print_lock	src/main.c	/^static	pthread_mutex_t			print_lock;$/;"	kind:v	line:24	language:C	file:
 pstream_t	src/stream/stream.h	/^} stream_t, *pstream_t;$/;"	kind:t	line:38	language:C++	typeref:struct:_stream_t
-pty_close	src/stream/pty/pty.c	/^static	void	pty_close(ppty_stream_t p_this);$/;"	kind:p	line:23	language:C	file:	signature:(ppty_stream_t p_this)
-pty_close	src/stream/pty/pty.c	/^void pty_close(ppty_stream_t p_this)$/;"	kind:f	line:126	language:C	signature:(ppty_stream_t p_this)
-pty_open	src/stream/pty/pty.c	/^pstream_t pty_open(const char* path)$/;"	kind:f	line:25	language:C	signature:(const char* path)
+pty_close	src/stream/pty/pty.c	/^static	void	pty_close(ppty_stream_t p_this);$/;"	kind:p	line:24	language:C	file:	signature:(ppty_stream_t p_this)
+pty_close	src/stream/pty/pty.c	/^void pty_close(ppty_stream_t p_this)$/;"	kind:f	line:132	language:C	signature:(ppty_stream_t p_this)
+pty_open	src/stream/pty/pty.c	/^pstream_t pty_open(const char* path)$/;"	kind:f	line:26	language:C	signature:(const char* path)
 pty_open	src/stream/pty/pty.h	/^pstream_t	pty_open(const char* path);$/;"	kind:p	line:28	language:C++	signature:(const char* path)
-pty_read	src/stream/pty/pty.c	/^size_t pty_read(ppty_stream_t p_this, u8* buf, size_t size)$/;"	kind:f	line:96	language:C	signature:(ppty_stream_t p_this, u8* buf, size_t size)
-pty_read	src/stream/pty/pty.c	/^static	size_t	pty_read(ppty_stream_t p_this, u8* buf, size_t size);$/;"	kind:p	line:21	language:C	file:	signature:(ppty_stream_t p_this, u8* buf, size_t size)
+pty_read	src/stream/pty/pty.c	/^size_t pty_read(ppty_stream_t p_this, u8* buf, size_t size)$/;"	kind:f	line:98	language:C	signature:(ppty_stream_t p_this, u8* buf, size_t size)
+pty_read	src/stream/pty/pty.c	/^static	size_t	pty_read(ppty_stream_t p_this, u8* buf, size_t size);$/;"	kind:p	line:22	language:C	file:	signature:(ppty_stream_t p_this, u8* buf, size_t size)
 pty_stream_t	src/stream/pty/pty.h	/^} pty_stream_t, *ppty_stream_t;$/;"	kind:t	line:26	language:C++	typeref:struct:_pty_stream
-pty_write	src/stream/pty/pty.c	/^bool pty_write(ppty_stream_t p_this, const u8* buf, size_t size)$/;"	kind:f	line:107	language:C	signature:(ppty_stream_t p_this, const u8* buf, size_t size)
-pty_write	src/stream/pty/pty.c	/^static	bool	pty_write(ppty_stream_t p_this, const u8* buf, size_t size);$/;"	kind:p	line:22	language:C	file:	signature:(ppty_stream_t p_this, const u8* buf, size_t size)
+pty_write	src/stream/pty/pty.c	/^bool pty_write(ppty_stream_t p_this, const u8* buf, size_t size)$/;"	kind:f	line:113	language:C	signature:(ppty_stream_t p_this, const u8* buf, size_t size)
+pty_write	src/stream/pty/pty.c	/^static	bool	pty_write(ppty_stream_t p_this, const u8* buf, size_t size);$/;"	kind:p	line:23	language:C	file:	signature:(ppty_stream_t p_this, const u8* buf, size_t size)
+punix_socket_stream_t	src/stream/unix-socket/unix-socket.h	/^} unix_socket_stream_t, *punix_socket_stream_t;$/;"	kind:t	line:27	language:C++	typeref:struct:_unix_socket_stream
 read	src/stream/stream.h	/^    stream_read_t	read;$/;"	kind:m	line:35	language:C++	struct:_stream_t	access:public
 rect_t	ui/data.py	/^class rect_t:$/;"	kind:c	line:87	language:Python	inherits:
 refresh	ui/controls/checkbox.py	/^	def refresh(self):$/;"	kind:m	line:35	language:Python	class:checkbox	access:public
@@ -291,10 +307,10 @@ refresh	ui/menu.py	/^    def refresh(self):$/;"	kind:m	line:53	language:Python	c
 refresh_edit	ui/controls/textbox.py	/^    def refresh_edit(self):$/;"	kind:m	line:83	language:Python	class:textbox	access:public
 region_t	ui/data.py	/^class region_t:$/;"	kind:c	line:96	language:Python	inherits:
 regist	analyser/arch.py	/^    def regist(self, dict):$/;"	kind:m	line:49	language:Python	class:arch	access:public
-run_flag	src/main.c	/^static	volatile bool			run_flag;$/;"	kind:v	line:25	language:C	file:
+run_flag	src/main.c	/^static	volatile bool			run_flag = false;$/;"	kind:v	line:26	language:C	file:
 s16	src/common.h	/^typedef signed short		s16;$/;"	kind:t	line:33	language:C++
-s2_send_thread	src/main.c	/^static	void*	s2_send_thread(void* args);$/;"	kind:p	line:35	language:C	file:	signature:(void* args)
-s2_send_thread	src/main.c	/^void* s2_send_thread(void* args)$/;"	kind:f	line:216	language:C	signature:(void* args)
+s2_send_thread	src/main.c	/^static	void*	s2_send_thread(void* args);$/;"	kind:p	line:36	language:C	file:	signature:(void* args)
+s2_send_thread	src/main.c	/^void* s2_send_thread(void* args)$/;"	kind:f	line:241	language:C	signature:(void* args)
 s32	src/common.h	/^typedef signed int			s32;$/;"	kind:t	line:34	language:C++
 s64	src/common.h	/^typedef signed long long	s64;$/;"	kind:t	line:35	language:C++
 s8	src/common.h	/^typedef	signed char			s8;$/;"	kind:t	line:32	language:C++
@@ -306,6 +322,7 @@ sort_build_tree	cfg/configure.py	/^def sort_build_tree(build_tree):$/;"	kind:f	l
 stat	cfg/configure.py	/^import stat$/;"	kind:i	line:23	language:Python
 str_help	ui/screen.py	/^    str_help = "Press <ESC> to return. Press <Page Up>, <Page Down> to switch pages. Press <↑>, <↓>, <←>, <→> to switch focus in one window. Press <TAB> to switch focus among all windows."$/;"	kind:v	line:49	language:Python	class:screen
 stream	src/stream/pty/pty.h	/^    stream_t	stream;$/;"	kind:m	line:23	language:C++	struct:_pty_stream	access:public
+stream	src/stream/unix-socket/unix-socket.h	/^    stream_t	stream;$/;"	kind:m	line:23	language:C++	struct:_unix_socket_stream	access:public
 stream_close_t	src/stream/stream.h	/^typedef void	(*stream_close_t)(struct _stream_t*);$/;"	kind:t	line:31	language:C++
 stream_open_t	src/stream/stream.h	/^typedef	pstream_t	(*stream_open_t)(const char*);$/;"	kind:t	line:41	language:C++
 stream_read_t	src/stream/stream.h	/^typedef	size_t	(*stream_read_t)(struct _stream_t*, u8*, size_t);$/;"	kind:t	line:25	language:C++
@@ -317,12 +334,12 @@ tag_list	analyser/arch.py	/^    tag_list = ["PREV", "ARCHDEF", "DEP", "DEPFLAGS"
 target	analyser/target.py	/^class target:$/;"	kind:c	line:33	language:Python	inherits:
 target_dict	analyser/target.py	/^    target_dict = {}$/;"	kind:v	line:37	language:Python	class:target
 textbox	ui/controls/textbox.py	/^class textbox(control):$/;"	kind:c	line:22	language:Python	inherits:control
-thread1	src/main.c	/^static	volatile pthread_t		thread1;$/;"	kind:v	line:28	language:C	file:
-thread2	src/main.c	/^static	volatile pthread_t		thread2;$/;"	kind:v	line:29	language:C	file:
-thread_print_buf	src/main.c	/^static	void	thread_print_buf(char* fmt, u8* buf, size_t len, ...);$/;"	kind:p	line:33	language:C	file:	signature:(char* fmt, u8* buf, size_t len, ...)
-thread_print_buf	src/main.c	/^void thread_print_buf(char* fmt, u8 * buf, size_t len, ...)$/;"	kind:f	line:127	language:C	signature:(char* fmt, u8 * buf, size_t len, ...)
-thread_printf	src/main.c	/^static	void	thread_printf(char* fmt, ...);$/;"	kind:p	line:32	language:C	file:	signature:(char* fmt, ...)
-thread_printf	src/main.c	/^void thread_printf(char* fmt, ...)$/;"	kind:f	line:117	language:C	signature:(char* fmt, ...)
+thread1	src/main.c	/^static	volatile pthread_t		thread1;$/;"	kind:v	line:29	language:C	file:
+thread2	src/main.c	/^static	volatile pthread_t		thread2;$/;"	kind:v	line:30	language:C	file:
+thread_print_buf	src/main.c	/^static	void	thread_print_buf(char* fmt, u8* buf, size_t len, ...);$/;"	kind:p	line:34	language:C	file:	signature:(char* fmt, u8* buf, size_t len, ...)
+thread_print_buf	src/main.c	/^void thread_print_buf(char* fmt, u8 * buf, size_t len, ...)$/;"	kind:f	line:129	language:C	signature:(char* fmt, u8 * buf, size_t len, ...)
+thread_printf	src/main.c	/^static	void	thread_printf(char* fmt, ...);$/;"	kind:p	line:33	language:C	file:	signature:(char* fmt, ...)
+thread_printf	src/main.c	/^void thread_printf(char* fmt, ...)$/;"	kind:f	line:119	language:C	signature:(char* fmt, ...)
 traceback	ui/screen.py	/^import traceback$/;"	kind:i	line:21	language:Python
 true	src/common.h	38;"	kind:d	line:38	language:C++
 type	src/stream/stream.h	/^    const char*		type;$/;"	kind:m	line:34	language:C++	struct:_stream_t	access:public
@@ -331,12 +348,19 @@ u16	src/common.h	/^typedef unsigned short		u16;$/;"	kind:t	line:28	language:C++
 u32	src/common.h	/^typedef unsigned int		u32;$/;"	kind:t	line:29	language:C++
 u64	src/common.h	/^typedef unsigned long long	u64;$/;"	kind:t	line:30	language:C++
 u8	src/common.h	/^typedef	unsigned char		u8;$/;"	kind:t	line:27	language:C++
-unix_socket_open	src/stream/unix-socket/unix-socket.c	/^pstream_t	unix_socket_open(const char* path)$/;"	kind:f	line:20	language:C	signature:(const char* path)
-unix_socket_open	src/stream/unix-socket/unix-socket.h	/^pstream_t	unix_socket_open(const char* path);$/;"	kind:p	line:25	language:C++	signature:(const char* path)
+unix_socket_close	src/stream/unix-socket/unix-socket.c	/^static	void	unix_socket_close(punix_socket_stream_t p_this);$/;"	kind:p	line:33	language:C	file:	signature:(punix_socket_stream_t p_this)
+unix_socket_close	src/stream/unix-socket/unix-socket.c	/^void unix_socket_close(punix_socket_stream_t p_this)$/;"	kind:f	line:113	language:C	signature:(punix_socket_stream_t p_this)
+unix_socket_open	src/stream/unix-socket/unix-socket.c	/^pstream_t	unix_socket_open(const char* path)$/;"	kind:f	line:37	language:C	signature:(const char* path)
+unix_socket_open	src/stream/unix-socket/unix-socket.h	/^pstream_t	unix_socket_open(const char* path);$/;"	kind:p	line:29	language:C++	signature:(const char* path)
+unix_socket_read	src/stream/unix-socket/unix-socket.c	/^size_t unix_socket_read(punix_socket_stream_t p_this, u8* buf, size_t size)$/;"	kind:f	line:83	language:C	signature:(punix_socket_stream_t p_this, u8* buf, size_t size)
+unix_socket_read	src/stream/unix-socket/unix-socket.c	/^static	size_t	unix_socket_read(punix_socket_stream_t p_this,$/;"	kind:p	line:29	language:C	file:	signature:(punix_socket_stream_t p_this, u8* buf, size_t size)
+unix_socket_stream_t	src/stream/unix-socket/unix-socket.h	/^} unix_socket_stream_t, *punix_socket_stream_t;$/;"	kind:t	line:27	language:C++	typeref:struct:_unix_socket_stream
+unix_socket_write	src/stream/unix-socket/unix-socket.c	/^bool unix_socket_write(punix_socket_stream_t p_this, const u8 * buf, size_t size)$/;"	kind:f	line:94	language:C	signature:(punix_socket_stream_t p_this, const u8 * buf, size_t size)
+unix_socket_write	src/stream/unix-socket/unix-socket.c	/^static	bool	unix_socket_write(punix_socket_stream_t p_this,$/;"	kind:p	line:31	language:C	file:	signature:(punix_socket_stream_t p_this, const u8* buf, size_t size)
 update	ui/controls/textbox.py	/^    def update(self):$/;"	kind:m	line:213	language:Python	class:textbox	access:public
 update	ui/screen.py	/^    def update(self):$/;"	kind:m	line:104	language:Python	class:screen	access:public
-usage	src/main.c	/^static	void	usage(const char* filename);$/;"	kind:p	line:31	language:C	file:	signature:(const char* filename)
-usage	src/main.c	/^void usage(const char* filename)$/;"	kind:f	line:105	language:C	signature:(const char* filename)
+usage	src/main.c	/^static	void	usage(const char* filename);$/;"	kind:p	line:32	language:C	file:	signature:(const char* filename)
+usage	src/main.c	/^void usage(const char* filename)$/;"	kind:f	line:107	language:C	signature:(const char* filename)
 utf8buf	ui/data.py	/^class utf8buf:$/;"	kind:c	line:21	language:Python	inherits:
 write	src/stream/stream.h	/^    stream_write_t	write;$/;"	kind:m	line:36	language:C++	struct:_stream_t	access:public
 xml	analyser/arch.py	/^import xml.dom.minidom$/;"	kind:i	line:18	language:Python
