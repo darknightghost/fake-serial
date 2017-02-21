@@ -15,18 +15,22 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "./pty.h"
+#include "./tty.h"
 #include <pty.h>
 #include <sys/select.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <termios.h>
 
-static	size_t	pty_read(ppty_stream_t p_this, u8* buf, size_t size);
-static	bool	pty_write(ppty_stream_t p_this, const u8* buf, size_t size);
-static	void	pty_close(ppty_stream_t p_this);
+static	size_t	tty_read(ptty_stream_t p_this, u8* buf, size_t size);
+static	bool	tty_write(ptty_stream_t p_this, const u8* buf, size_t size);
+static	void	tty_close(ptty_stream_t p_this);
 
-pstream_t pty_open(const char* path)
+pstream_t tty_open(const char* path)
 {
     //Allocate memory
-    ppty_stream_t p_ret = malloc(sizeof(pty_stream_t));
+    ptty_stream_t p_ret = malloc(sizeof(tty_stream_t));
 
     if(p_ret == NULL) {
         goto EXPECT_ALLOC_MEM;
@@ -40,7 +44,7 @@ pstream_t pty_open(const char* path)
 
     strcpy(p_ret->path, path);
 
-    //Set pty attribute
+    //Set tty attribute
     struct termios termo = {
         .c_iflag = IGNBRK | IGNPAR | IGNCR,
         .c_oflag = 0,
@@ -49,43 +53,27 @@ pstream_t pty_open(const char* path)
     };
     memset(&(termo.c_cc), 0, sizeof(termo.c_cc));
 
-    //Open pty
-    int fd_master, fd_slave;
-    char slave_path[PATH_MAX];
+    //Open tty
+    int fd;
 
-    if(openpty(&fd_master, &fd_slave, slave_path, &termo, NULL) != 0) {
-        printf("Failed to open pty.\n");
-        goto EXCEPT_OPEN_PTY;
+    fd = open(path, O_RDWR);
+
+    if(fd < 1) {
+        printf("Failed to open tty.\n");
+        goto EXCEPT_OPEN_TTY;
     }
 
-    close(fd_slave);
+    tcsetattr(fd, TCSANOW, &termo);
 
-    //Create link
-    printf("Linking \"%s\" to \"%s\"...\n",
-           slave_path,
-           path);
-
-    unlink(path);
-
-    if(symlink(slave_path, path) != 0) {
-        printf("Link failed.\n");
-        goto EXCEPT_CREATE_LINK;
-    }
-
-    printf("Link created.\n");
-
-    p_ret->fd_master = fd_master;
-    p_ret->stream.read = (stream_read_t)pty_read;
-    p_ret->stream.write = (stream_write_t)pty_write;
-    p_ret->stream.close = (stream_close_t)pty_close;
-    p_ret->stream.type = "pty";
+    p_ret->fd = fd;
+    p_ret->stream.read = (stream_read_t)tty_read;
+    p_ret->stream.write = (stream_write_t)tty_write;
+    p_ret->stream.close = (stream_close_t)tty_close;
+    p_ret->stream.type = "tty";
 
     return (pstream_t)p_ret;
 
-EXCEPT_CREATE_LINK:
-    close(fd_master);
-
-EXCEPT_OPEN_PTY:
+EXCEPT_OPEN_TTY:
     free(p_ret->path);
 
 EXCEPT_ALLOC_PATH:
@@ -95,9 +83,9 @@ EXPECT_ALLOC_MEM:
     return NULL;
 }
 
-size_t pty_read(ppty_stream_t p_this, u8* buf, size_t size)
+size_t tty_read(ptty_stream_t p_this, u8* buf, size_t size)
 {
-    ssize_t read_len = read(p_this->fd_master, buf, size);
+    ssize_t read_len = read(p_this->fd, buf, size);
 
     if(read_len < 0) {
         if(errno == EIO) {
@@ -110,12 +98,12 @@ size_t pty_read(ppty_stream_t p_this, u8* buf, size_t size)
     return (size_t)read_len;
 }
 
-bool pty_write(ppty_stream_t p_this, const u8* buf, size_t size)
+bool tty_write(ptty_stream_t p_this, const u8* buf, size_t size)
 {
     const u8* p = buf;
 
     for(size_t count = 0; count < size;) {
-        ssize_t write_len = write(p_this->fd_master,
+        ssize_t write_len = write(p_this->fd,
                                   p, size - count);
 
         if(write_len < 0) {
@@ -126,15 +114,14 @@ bool pty_write(ppty_stream_t p_this, const u8* buf, size_t size)
         count += write_len;
     }
 
-    fsync(p_this->fd_master);
+    fsync(p_this->fd);
 
     return true;
 }
 
-void pty_close(ppty_stream_t p_this)
+void tty_close(ptty_stream_t p_this)
 {
-    close(p_this->fd_master);
-    unlink(p_this->path);
+    close(p_this->fd);
     free(p_this->path);
     free(p_this);
     return;

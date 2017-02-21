@@ -107,6 +107,8 @@ bool unix_socket_write(punix_socket_stream_t p_this, const u8 * buf, size_t size
         count += write_len;
     }
 
+    fsync(p_this->fd);
+
     return true;
 }
 

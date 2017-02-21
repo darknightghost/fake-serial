@@ -18,13 +18,16 @@
 #include "./stream.h"
 #include "./pty/pty.h"
 #include "./unix-socket/unix-socket.h"
+#include "./tty/tty.h"
 
 #define STREAM_TYPE_PTY				0
 #define STREAM_TYPE_UNIX_SOCKET		1
+#define STREAM_TYPE_TTY				2
 
 static	stream_open_t		type_open_table[] = {
     [STREAM_TYPE_PTY] = pty_open,
-    [STREAM_TYPE_UNIX_SOCKET] = unix_socket_open
+    [STREAM_TYPE_UNIX_SOCKET] = unix_socket_open,
+    [STREAM_TYPE_TTY] = tty_open
 };
 
 pstream_t open_stream(const char* name, const char* path)
@@ -36,6 +39,9 @@ pstream_t open_stream(const char* name, const char* path)
 
     } else if(strcmp(name, "unix-socket") == 0) {
         type = STREAM_TYPE_UNIX_SOCKET;
+
+    } else if(strcmp(name, "tty") == 0) {
+        type = STREAM_TYPE_TTY;
 
     } else {
         return NULL;
